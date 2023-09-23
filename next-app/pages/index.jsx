@@ -1,11 +1,42 @@
-// '/' 경로를 가지는 페이지
+import Link from 'next/link';
+import React, { useState } from 'react';
+
 const App = () => {
+  const [username, setUsername] = useState('');
   return (
     <div>
-      {/* 즉, public 디렉토리 내의 이미지를 불러올 때 경로 앞에 /public/를 추가할 필요가 없습니다. */}
-      <img src="/Chese.jpg" alt="치즈" />
+      <label>
+        username
+        <input value={username} onChange={e => setUsername(e.target.value)} />
+      </label>
+      <p>{username} 깃 허브 검색하기</p>
+      <Link href={`users/${username}`}>검색하기</Link>
     </div>
   );
-};
+}; //jerrynim
 
 export default App;
+
+// import fetch from 'isomorphic-unfetch';
+
+// const index = ({ user }) => {
+//   const username = user && user.name;
+//   return <div>{username}</div>;
+// };
+
+// export const getServerSideProps = async () => {
+//   try {
+//     const res = await fetch('https://api.github.com/users/jerrynim');
+//     if (res.status === 200) {
+//       const user = await res.json();
+//       console.log('user:', user);
+//       return { props: { user } };
+//     }
+//     return { props: {} };
+//   } catch (e) {
+//     console.log(e);
+//     return { props: {} };
+//   }
+// };
+
+// export default index;
