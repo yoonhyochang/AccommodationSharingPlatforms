@@ -1,11 +1,11 @@
-import fetch from 'isomorphic-unfetch';
+import fetch from "isomorphic-unfetch";
 
 const Name = ({ user }) => {
   const username = user && user.name;
   return <div>{username}</div>;
 };
 
-export const getServerSideProps = async ({ query }) => {
+export const getInitualProps = async ({ query }) => {
   const { name } = query;
   try {
     const res = await fetch(`https://api.github.com/users/${name}`);
@@ -13,10 +13,11 @@ export const getServerSideProps = async ({ query }) => {
       const user = await res.json();
       return { props: { user } };
     }
+    return { props: {} };
   } catch (e) {
     console.log(e);
+    return {};
   }
-  return { props: {} };
 };
 
 export default Name;
