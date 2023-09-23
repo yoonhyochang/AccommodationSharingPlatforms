@@ -1,25 +1,9 @@
 // '/' 경로를 가지는 페이지
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-
 const App = () => {
-  const [name, setName] = useState('');
-  const router = useRouter();
   return (
     <div>
-      <button type="button" onClick={() => router.push('/tomato')}>
-        tomato로 가기
-      </button>
-      <p>이름</p>
-      <input
-        value={name}
-        onChange={e => setName(e.target.value)}
-        style={{ marginRight: '12px' }}
-      />
-      <button type="button" onClick={() => router.push(`/vegetable/${name}`)}>
-        {name}으로 가기
-      </button>
+      {/* 즉, public 디렉토리 내의 이미지를 불러올 때 경로 앞에 /public/를 추가할 필요가 없습니다. */}
+      <img src="/Chese.jpg" alt="치즈" />
     </div>
   );
 };
