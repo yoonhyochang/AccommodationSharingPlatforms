@@ -15,11 +15,13 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: "module"
   },
-  plugins: ["react"],
+  plugins: ["react", "styled-jsx/eslint"],
   rules: {
     quotes: ["error", "double"], // 더블 쿼터 사용
     "linebreak-style": "off",
     "spaced-comment": "off",
+    "styled-jsx/no-unused-styles": 2,
+    "styled-jsx/syntax": 2,
     "no-unused-vars": "off", // 사용안한 변수 경고 중복
     "jsx-a11y/control-has-associated-label": "off", // 상호작용하는 엘리먼트에 label을 넣는다
     "react/no-array-index-key": "off", // key값으로 index를 사용할수 있다.
