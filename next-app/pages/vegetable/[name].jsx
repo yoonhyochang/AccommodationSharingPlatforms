@@ -2,11 +2,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 const name = () => {
-  const router = useRouter();
-  console.log('router :', router);
+  const { query } = useRouter();
   return (
     <div>
-      <h2>Hello!!</h2>
+      <h2>Hello!! {query.name}</h2>
       <Link href={'/'}>Move to'/'</Link>
     </div>
   );
