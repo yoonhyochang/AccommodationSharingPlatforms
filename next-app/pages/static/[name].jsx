@@ -20,7 +20,7 @@ export const getStaticProps = async ({ params }) => {
     }
     return { props: { time: new Date().toISOString() } };
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     return { props: { time: new Date().toISOString() } };
   }
 };
