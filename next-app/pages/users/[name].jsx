@@ -1,8 +1,7 @@
-import css from "styled-jsx/css";
 import fetch from "isomorphic-unfetch";
+import css from "styled-jsx/css";
 import Profile from "../../components/Profile";
 import formatDistance from "date-fns/formatDistance";
-
 const style = css`
   .repos-wrapper {
     width: 100%;
@@ -99,7 +98,7 @@ const name = ({ user, repos }) => {
 };
 
 export const getServerSideProps = async ({ query }) => {
-  const { name } = query;
+  const { name, page } = query;
   try {
     let user;
     let repos;
@@ -110,12 +109,13 @@ export const getServerSideProps = async ({ query }) => {
       console.log("user :", user);
     }
     const repoRes = await fetch(
-      `https://api.github.com/users/${name}/repos?sort=updated&page=1&per_page=10`
+      `https://api.github.com/users/${name}/repos?sort=updated&page=${page}&
+      per_page=10`
     );
 
     if (repoRes.status === 200) {
       repos = await repoRes.json();
-      // console.log("repos :", repos);
+      console.log("repos :", repos);
     }
     console.log("repos :", repos);
     return { props: { user, repos } };
