@@ -50,7 +50,7 @@ const Profile = ({ user }) => {
   return (
     <>
       <div className="profile-box">
-        <div>
+        <div className="profile-image-wrapper">
           <img
             className="profile-image-wrapper"
             src={user.avatar_url}
@@ -69,9 +69,6 @@ const Profile = ({ user }) => {
           <span className="profile-user-info-text">{user.location}</span>
         </p>
         <p className="profile-user-info">
-          {user.bio ? user.bio : "윤효창 연습중👻"}
-        </p>
-        <p className="profile-user-info">
           <GoMail size={16} color="#6a737d" />
           <span className="profile-user-info-text">
             {user.email ? user.email : "yhc9308@gmail.com"}
@@ -80,7 +77,10 @@ const Profile = ({ user }) => {
         </p>
         <p className="profile-user-info">
           <GoLink size={16} color="#6a737d" />
-          <span className="profile-user-info-text">jerrynim.com</span>
+          <span className="profile-user-info-text">
+            {" "}
+            {user.bio ? user.bio : "윤효창 연습중👻"}
+          </span>
         </p>
       </div>
       <style jsx>{style}</style>
