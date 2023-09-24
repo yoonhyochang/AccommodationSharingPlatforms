@@ -14,7 +14,7 @@
     "next": "^9.5.5",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-icons": "^3.11.0",
+    "react-icons": "^4.11.0",
     "styled-jsx": "^5.1.2"
   },
   "devDependencies": {
