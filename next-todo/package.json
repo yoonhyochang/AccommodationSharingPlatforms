@@ -1,0 +1,16 @@
+{
+  "name": "next-todo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "next": "^13.5.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.6.4",
+    "@types/react": "^18.2.22",
+    "typescript": "^5.2.2"
+  }
+}
