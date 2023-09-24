@@ -18,6 +18,8 @@ module.exports = {
   },
   plugins: ["react", "@typescript-eslint"],
   rules: {
+    "space-before-blocks": "off",
+    "linebreak-style": ["error", "windows"],
     quotes: ["error", "double"], //더블 쿼터 사용
     "@typescript-eslint/quotes": ["error", "double"], //더블 쿼터 사용
     "no-unused-vars": "off", //사용안한 변수 경고 중복
