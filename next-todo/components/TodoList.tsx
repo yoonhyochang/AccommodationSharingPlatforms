@@ -56,6 +56,36 @@ const Container = styled.div`
   .bg-yellow {
     background-color: ${pallete.yellow};
   }
+
+  .todo-list {
+    .todo-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 52px;
+      border-bottom: 1px solid ${pallete.gray};
+
+      .todo-left-side {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        .todo-color-block {
+          width: 12px;
+          height: 100%;
+        }
+        .checked-todo-text {
+          color: ${pallete.gray};
+          text-decoration: line-through;
+        }
+        .todo-text {
+          margin-left: 12px;
+          font-size: 16px;
+        }
+      }
+    }
+  }
 `;
 interface IProps {
   todos: TodoType[];
@@ -106,19 +136,37 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
 
   return (
     <Container>
-      <div className="todo-list-header">
-        <p className="todo-list-last-todo">
-          남은TODO<span>{todos.length}개</span>
-        </p>
-        <div className="todo-list-header-colors">
-          {Object.keys(todoColorNums).map((color, index) => (
-            <div className="todo-list-header-color-num" key={index}>
-              <div className={`todo-list-header-round-color bg-${color}`} />
-              <p>{todoColorNums[color]}개</p>
+      <ul className="todo-list">
+        {todos.map((todo) => (
+          <li className="todo-item" key={todo.id}>
+            <div className="todo-left-side">
+              <div className={`todo-color-block bg-${todo.color}`} />
+              <p
+                className={`todo-text ${
+                  todo.checked ? "checked-todo-text" : ""
+                }`}
+              >
+                {todo.text}
+              </p>
             </div>
-          ))}
-        </div>
-      </div>
+            <div className="todo-list-header">
+              <p className="todo-list-last-todo">
+                남은TODO<span>{todos.length}개</span>
+              </p>
+              <div className="todo-list-header-colors">
+                {Object.keys(todoColorNums).map((color, index) => (
+                  <div className="todo-list-header-color-num" key={index}>
+                    <div
+                      className={`todo-list-header-round-color bg-${color}`}
+                    />
+                    <p>{todoColorNums[color]}개</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
     </Container>
   );
 };
