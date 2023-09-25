@@ -6,6 +6,10 @@ import { TodoType } from "../types/todo";
 const Container = styled.div`
   width: 100%;
 
+  .todo-num {
+    margin-left: 12px;
+  }
+
   .todo-list-header {
     padding: 12px;
     position: relative;
@@ -84,9 +88,23 @@ const Container = styled.div`
           font-size: 16px;
         }
       }
+      .todo-right-side {
+        display: flex;
+        align-items: center;
+        margin-right: 12px;
+        .todo-button {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          border: 1px solid ${pallete.gray};
+          background-color: transparent;
+          outline: none;
+        }
+      }
     }
   }
 `;
+
 interface IProps {
   todos: TodoType[];
 }
@@ -136,6 +154,19 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
 
   return (
     <Container>
+      <div className="todo-list-header">
+        <p className="todo-list-last-todo">
+          남은TODO<span>{todos.length}개</span>
+        </p>
+        <div className="todo-list-header-colors">
+          {Object.keys(todoColorNums).map((color, index) => (
+            <div className="todo-list-header-color-num" key={index}>
+              <div className={`todo-list-header-round-color bg-${color}`} />
+              <p>{todoColorNums[color]}개</p>
+            </div>
+          ))}
+        </div>
+      </div>
       <ul className="todo-list">
         {todos.map((todo) => (
           <li className="todo-item" key={todo.id}>
@@ -149,20 +180,14 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
                 {todo.text}
               </p>
             </div>
-            <div className="todo-list-header">
-              <p className="todo-list-last-todo">
-                남은TODO<span>{todos.length}개</span>
-              </p>
-              <div className="todo-list-header-colors">
-                {Object.keys(todoColorNums).map((color, index) => (
-                  <div className="todo-list-header-color-num" key={index}>
-                    <div
-                      className={`todo-list-header-round-color bg-${color}`}
-                    />
-                    <p>{todoColorNums[color]}개</p>
-                  </div>
-                ))}
-              </div>
+            <div className="todo-right-side">
+              {!todo.checked && (
+                <button
+                  type="button"
+                  className="todo-button"
+                  onClick={() => {}}
+                />
+              )}
             </div>
           </li>
         ))}
@@ -170,5 +195,4 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
     </Container>
   );
 };
-
 export default TodoList;
