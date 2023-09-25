@@ -3,6 +3,9 @@ import styled from "styled-components";
 import pallete from "../styles/pallete";
 import { TodoType } from "../types/todo";
 
+import TrashCanIcon from "../public/static/svg/trash_can.svg";
+import CheckMarkIcon from "../public/static/svg/check_mark.svg";
+
 const Container = styled.div`
   width: 100%;
 
@@ -92,6 +95,20 @@ const Container = styled.div`
         display: flex;
         align-items: center;
         margin-right: 12px;
+        svg {
+          &:first-child {
+            margin-right: 16px;
+          }
+        }
+        .todo-trash-can {
+          width: 16px;
+          path {
+            fill: ${pallete.deep_red};
+          }
+        }
+        .todo-check-mark {
+          fill: ${pallete.deep_green};
+        }
         .todo-button {
           width: 20px;
           height: 20px;
@@ -104,10 +121,6 @@ const Container = styled.div`
     }
   }
 `;
-
-interface IProps {
-  todos: TodoType[];
-}
 
 const TodoList: React.FC<IProps> = ({ todos }) => {
   //* 색깔 객체 구하기
@@ -181,11 +194,29 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
               </p>
             </div>
             <div className="todo-right-side">
+              {todo.checked && (
+                <>
+                  <TrashCanIcon
+                    className="todo-trash-can"
+                    onClick={() => {
+                      deleteTodo(todo.id);
+                    }}
+                  />
+                  <CheckMarkIcon
+                    className="todo-check-mark"
+                    onClick={() => {
+                      checkTodo(todo.id);
+                    }}
+                  />
+                </>
+              )}
               {!todo.checked && (
                 <button
                   type="button"
                   className="todo-button"
-                  onClick={() => {}}
+                  onClick={() => {
+                    checkTodo(todo.id);
+                  }}
                 />
               )}
             </div>
