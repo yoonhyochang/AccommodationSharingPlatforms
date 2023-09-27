@@ -19,7 +19,7 @@ module.exports = {
   plugins: ["react", "@typescript-eslint"],
   rules: {
     "space-before-blocks": "off",
-    "import/no-extraneous-dependencies": ["error", { devDependencies: true }],
+    "import/no-extraneous-dependencies": "off",
     "linebreak-style": ["error", "windows"],
     quotes: ["error", "double"], //더블 쿼터 사용
     "@typescript-eslint/quotes": ["error", "double"], //더블 쿼터 사용

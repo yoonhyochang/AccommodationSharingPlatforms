@@ -34,7 +34,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       id: todoId,
       text,
       color,
-      checked: false,
+      checked: false
     };
 
     Data.todo.write([...todos, newTodo]);
