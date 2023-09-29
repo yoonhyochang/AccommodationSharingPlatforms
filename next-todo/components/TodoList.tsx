@@ -5,7 +5,7 @@ import { TodoType } from "../types/todo";
 import { useRouter } from "next/router";
 import TrashCanIcon from "../public/static/svg/trash_can.svg";
 import CheckMarkIcon from "../public/static/svg/check_mark.svg";
-import { checkTodoAPI } from "../lib/api/todo";
+import { checkTodoAPI, deleteTodoAPI } from "../lib/api/todo";
 
 const Container = styled.div`
   width: 100%;
@@ -188,6 +188,19 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
         return todo;
       });
       setLocalTodos(newTodos);
+      console.log("체크하였습니다.");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  //*투두 삭제하기
+  const deleteTodo = async (id: number) => {
+    try {
+      await deleteTodoAPI(id);
+      const newTodos = todos.filter((todo) => todo.id !== id);
+      setLocalTodos(newTodos);
+      console.log("삭제했습니다.");
     } catch (e) {
       console.log(e);
     }
@@ -227,7 +240,7 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
                   <TrashCanIcon
                     className="todo-trash-can"
                     onClick={() => {
-                      deleteTodo(todo.id);
+                      deleteTodo(todo.id); //여기
                     }}
                   />
                   <CheckMarkIcon

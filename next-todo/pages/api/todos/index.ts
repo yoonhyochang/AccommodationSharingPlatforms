@@ -19,7 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const { text, color } = req.body;
     if (!text || !color) {
       res.statusCode = 400;
-      console.log("text :", text);
+      // console.log("text :", text);
       return res.send("text 혹은 color 가 없습니다.");
     }
 
