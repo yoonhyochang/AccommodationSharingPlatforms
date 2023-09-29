@@ -1,7 +1,7 @@
 import fs from "fs";
 import { join } from "path";
 import { NextApiRequest, NextApiResponse } from "next";
-import { TodoType } from "../../types/todo";
+import { TodoType } from "../../../types/todo";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {

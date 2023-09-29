@@ -1,10 +1,11 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
 import pallete from "../styles/pallete";
 import { TodoType } from "../types/todo";
-
+import { useRouter } from "next/router";
 import TrashCanIcon from "../public/static/svg/trash_can.svg";
 import CheckMarkIcon from "../public/static/svg/check_mark.svg";
+import { checkTodoAPI } from "../lib/api/todo";
 
 const Container = styled.div`
   width: 100%;
@@ -123,6 +124,8 @@ const Container = styled.div`
 `;
 
 const TodoList: React.FC<IProps> = ({ todos }) => {
+  const [localTodos, setLocalTodos] = useState(todos);
+
   //* 색깔 객체 구하기
   const getTodoColorNums = useCallback(() => {
     const colors = {
@@ -133,8 +136,8 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
       blue: 0,
       navy: 0
     };
-
-    todos.forEach((todo) => {
+    //색깔 객체 구하기 안의 forEach
+    localTodos?.forEach((todo) => {
       switch (todo.color) {
         case "red":
           colors.red += 1;
@@ -165,11 +168,36 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
   //* 색상별 투두 개수
   const todoColorNums = useMemo(getTodoColorNums, [todos]);
 
+  const router = useRouter();
+  //* 투두 체크하기
+  const checkTodo = async (id: number) => {
+    try {
+      await checkTodoAPI(id);
+      console.log("체크 하였습니다.");
+      //* 체크를 적용하는 방법 1(데이터 다시 받기)
+      // router.reload();
+
+      //* 체크를 적용하는 방법 2(데이터 다시 받기)
+      // router.push("/");
+
+      //* 체크를 적용하는 방법 3(data를  local로 저장하여 사용하기)
+      const newTodos = localTodos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, checked: !todoType.checked };
+        }
+        return todo;
+      });
+      setLocalTodos(newTodos);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <Container>
       <div className="todo-list-header">
         <p className="todo-list-last-todo">
-          남은TODO<span>{todos.length}개</span>
+          남은TODO<span>{localTodos.length}개</span>
         </p>
         <div className="todo-list-header-colors">
           {Object.keys(todoColorNums).map((color, index) => (
@@ -181,7 +209,7 @@ const TodoList: React.FC<IProps> = ({ todos }) => {
         </div>
       </div>
       <ul className="todo-list">
-        {todos.map((todo) => (
+        {localTodos.map((todo) => (
           <li className="todo-item" key={todo.id}>
             <div className="todo-left-side">
               <div className={`todo-color-block bg-${todo.color}`} />
