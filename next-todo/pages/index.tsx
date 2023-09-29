@@ -6,7 +6,7 @@ import todos from "../data/todos.json";
 import { getTodosAPI } from "../lib/api/todo";
 
 const app: NextPage = () => {
-  console.log(process.env, "클라이언트");
+  // console.log(process.env, "클라이언트");
   return <TodoList todos={todos} />;
 };
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
     return { props: { todos: data } };
   } catch (e) {
-    console.log("e :", e);
+    // console.log("e :", e);
     return { props: { todos: [] } };
   }
 };

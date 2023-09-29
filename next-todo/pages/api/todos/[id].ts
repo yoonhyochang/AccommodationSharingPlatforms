@@ -22,7 +22,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.statusCode = 200;
       res.end();
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       res.statusCode = 500;
       res.send(e);
     }
