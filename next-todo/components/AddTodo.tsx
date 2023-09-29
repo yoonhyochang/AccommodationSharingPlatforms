@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import pallete from "../styles/pallete";
 import BrushIcon from "../public/static/svg/brush.svg";
+import { TodoType } from "../types/todo";
 
 const Container = styled.div`
   padding: 16px;
@@ -31,7 +32,7 @@ const Container = styled.div`
     justify-content: space-between;
     .add-todo-color-list {
       display: flex;
-      .add-todo-color-button {
+      button {
         width: 24px;
         height: 24px;
         margin-right: 16px;
@@ -41,6 +42,9 @@ const Container = styled.div`
         &:last-child {
           margin: 0;
         }
+      }
+      .add-todo-selected-color {
+        border: 2px solid black !important;
       }
     }
   }
@@ -77,6 +81,7 @@ const Container = styled.div`
 
 const AddTodo: React.FC = () => {
   const [text, setText] = useState("");
+  const [selectedColor, setSelectedColor] = useState<TodoType["color"]>();
   return (
     <Container>
       <div className="add-todo-header">
@@ -96,7 +101,11 @@ const AddTodo: React.FC = () => {
               <button
                 key={index}
                 type="button"
-                className={`bg-${color} add-todo-color-button `}
+                className={`bg-${color} add-todo-color-button ${
+                  color === selectedColor ? "add-todo-selected-color" : ""
+                }`}
+                key={index}
+                onClick={() => setSelectedColor(color as TodoType["color"])}
               />
             )
           )}
