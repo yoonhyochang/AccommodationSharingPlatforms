@@ -1,1 +1,8 @@
-[{"id":1,"text":"마트 가서 장보기","color":"red","checked":true},{"id":2,"text":"수학 숙제하기","color":"orange","checked":true},{"id":3,"text":"코딩","color":"yellow","checked":false},{"id":6,"text":"분리수거","color":"navy","checked":false},{"id":7,"text":"asd","color":"blue","checked":false},{"id":8,"text":"효창 헬스 하기 추가","color":"blue","checked":true}]
+[
+  { "id": 1, "text": "마트 가서 장보기", "color": "red", "checked": true },
+  { "id": 2, "text": "수학 숙제하기", "color": "orange", "checked": true },
+  { "id": 3, "text": "코딩", "color": "yellow", "checked": false },
+  { "id": 6, "text": "분리수거", "color": "navy", "checked": false },
+  { "id": 7, "text": "asd", "color": "blue", "checked": false },
+  { "id": 8, "text": "효창 헬스 하기 추가", "color": "blue", "checked": true }
+]
